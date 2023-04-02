@@ -4,11 +4,11 @@
 
 ## How to start
 
-git clone https://github.com/DDG667/Sut_Bot
-cd Sut_Bot
-poetry install
-nb run
+$ git clone https://github.com/DDG667/Sut_Bot
+$ cd Sut_Bot
+$ poetry install
+$ nb run
 
 ## Group
 
-QQ: 686221881
+QQ: [686221881](https://jq.qq.com/?_wv=1027&k=V0mhDwaV)
