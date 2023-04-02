@@ -1,0 +1,9 @@
+from nonebot import on_command
+from .classes import thing,user,users
+from pickle import load,dump
+
+checkin=on_command('签到')
+@checkin.handle()
+async def _()->None:
+    
+    

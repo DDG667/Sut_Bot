@@ -1,0 +1,25 @@
+function c() {
+    if (1 > 2) {
+        console.log('1 < 2')
+    } else if (2 < 1) {
+
+    } {console.log('1 ≥ 2')}
+    return 0
+}
+
+
+var b = c()
+console.log(b)
+var a = 'ajsvkhskanapejelsje'
+console.log(a[0])
+console.log(a[-1])
+console.log(a[2, 8])
+console.log(a.length)
+console.log(a.substring(6))
+console.log(a.substring(1, 6))
+a.toUpperCase()
+console.log(a)
+
+var b = ['e', 'sj', 'a', 'ai', 'ik', 'qw', 'ad']
+console.log(b[0, 3])
+

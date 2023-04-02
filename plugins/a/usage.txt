@@ -1,0 +1,42 @@
+下载
+
+http://221.178.13.13/ftn_handler/dc830f69cfdaa7f03ba54eafcf3ce17d9e204274d546031b4fbb462871679f25adc755ab309fdbb14ed29fa290499f9c7683412b44f1a6a862724f2055b09385/?fname=2f64343463326535322d376434302d346239612d613765342d616566373932383333633832
+
+安装进入
+输入
+
+termux-setup-storage
+pkg up
+
+卡住就选
+y
+
+然后
+
+pkg i python -y
+
+然后找到.py文件路径
+设路径为{path/}，文件名为{name.py}
+
+不知道的看文末分割线下
+
+输入
+
+python {path/}{name.py}
+
+没了
+
+————————————————————————————————————
+————————————————————————————————————
+
+手机自带浏览器文件保存路径：
+
+/sdcard/下载/
+用户安装浏览器文件保存路径：
+
+/sdcard/Download/
+QQ文件保存路径：
+
+/sdcard/0/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/
+
+注：安卓11及以上Termux无法访问上方QQ文件保存路径，请使用自带文件管理器或MT管理器手动移动

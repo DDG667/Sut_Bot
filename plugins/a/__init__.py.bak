@@ -1,0 +1,133 @@
+import os
+from json import JSONDecodeError, loads
+from random import choice
+from re import findall
+from time import strftime, localtime
+from nonebot.adapters.cqhttp import ActionFailed, Message, GroupMessageEvent
+from nonebot import on_command
+from nonebot.permission import SUPERUSER
+from nonebot.adapters.onebot.v11 import Bot, GROUP, MessageSegment
+from requests import get
+
+abc = on_command("QQGroup", aliases={'官方群'}, permission=GROUP, priority=10)
+
+
+@abc.handle()
+async def handle_first_recei():
+    await abc.finish(Message('扫码入群[CQ:face,id=324]：[CQ:image,file=d47c494d2e86927670c8ce7d804bb201.image,subType=0,url=https://gchat.qpic.cn/gchatpic_new/3580426231/582489481-2182453240-D47C494D2E86927670C8CE7D804BB201/0?term=3&amp;is_origin=1]'))
+
+abcd = on_command("贴贴", permission=GROUP, priority=2)
+
+current_path = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.path.sep + ".") + "/"
+@abcd.handle()
+async def handle_first_receiv():
+    a=['Yes.jpg','No.jpg']
+    with open(f'{current_path}{choice(a)}','rb') as a:
+        await abc.finish(MessageSegment.image(a.read()))
+
+'''ab = on_command("一图", permission=SUPERUSER)
+
+
+@ab.handle()
+async def handle_first_receive():
+    a = [True, False]
+    if choice(a):
+        await ab.finish(MessageSegment.image(get('https://api.oick.cn/random/api.php').content))
+    else:
+        await ab.finish(MessageSegment.image(get(get('https://api.lklblog.cn/api/ecy.php').text).content))'''
+
+a1 = on_command("笑话", permission=GROUP)
+
+
+@a1.handle()
+async def h():
+    msg = get("https://api.lklblog.cn/api/qwxh.php").text
+    await a1.finish(MessageSegment.text(msg.replace('\\n', '  ')))
+
+
+def tct(t):
+    t = strftime(str("%Y/%m/%d %H:%M:%S"), localtime(t))
+    return t
+
+
+a2 = on_command('info', permission=SUPERUSER, priority=50)
+
+
+@a2.handle()
+async def _(bot: Bot, event: GroupMessageEvent):
+    gid = event.group_id
+    b = 0
+    member = '        ATRI'
+    for i in await bot.get_group_member_list(group_id=gid):
+        b += 1
+        c = loads(str(await bot.get_stranger_info(user_id=i['user_id'], no_cache=True)).replace('\'', '"'))
+        if b % 20 == 0:
+            a = get(
+                f'http://api.ay15.cn/api/wzztp/api.php?s=325&ss=ffffff&nr={member}')
+            img = get(a.text).content
+            await a2.send(MessageSegment.image(img))
+            member = ''
+        member += (f"\n\n职位：{i['role']}\n名称：{i['nickname']}\n账号：{+i['user_id']}\n性别：{i['sex']}\n年龄：{c['age']}\n入群时间：{tct(i['join_time'])}".replace(
+            'owner', '群主').replace('admin', '管理员').replace('member', '普通成员').replace('：0', '：未知').replace('unknown', '未知').replace('female', '女').replace('male', '男'))
+    a = get(
+        f'http://api.ay15.cn/api/wzztp/api.php?s=325&ss=ffffff&nr={member}')
+    img = get(a.text).content
+    await a2.finish(MessageSegment.image(img))
+
+a7=on_command('戳',permission=SUPERUSER)
+@a7.handle()
+async def _(event:GroupMessageEvent):
+    uid=findall('qq=(.*?)]',str(event.original_message))[0]
+    for _ in range(30):
+        await a7.send(Message(f'[CQ:poke,qq={uid}]'))
+    await a7.finish()
+
+qun=on_command('ATRI-')
+@qun.handle()
+async def _():
+    await qun.finish('\t菜鸟协会 (686221881)\nATRI官方主群\n\n\n\t冰•智慧树 (551099482)\n不一样的游戏交流群，欢迎加入')
+
+
+def bb(b):
+    if len(b)>4400:
+        yield b[0:4400]
+        bb(b[4400:])
+
+async def search(e,keyword:str):
+    b=''
+    api=f'http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key={keyword}&bk_length=600'
+    with get(api) as a:
+        try:
+            info=loads(a.text)
+            mtitle=info['title']
+            card=info['card']
+            for j in card:
+                a=''
+                value=j['value']
+                for l in value:
+                    if '，' in l:
+                        for k in findall('[^|>](.*?)<',l):
+                            a+=k
+                    elif '</a>' in l and '></a>' not in l:
+                        for k in findall('>(.*?)<',l):
+                            a+=k
+                    elif '<' in l:
+                        a+=findall('^(.*?)<',f'{l}  ')[0]
+                    else:
+                        a+=f'{l}  '
+                b+=f"\n{j['name']}:\n      {a}"
+            await e.finish(f"\t\t\t\t{mtitle}\n{b}")
+        except JSONDecodeError:
+            await e.finish('Error!')
+        except ActionFailed:
+            await e.send(bb(b))
+            await e.finish()
+
+
+baike=on_command('百科')
+@baike.handle()
+async def _(e:GroupMessageEvent):
+    a=e.get_plaintext().replace('百科 ','')
+    await search(baike,a)
+
+
