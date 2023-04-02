@@ -1,12 +1,14 @@
-# ATRI_2.0
+# Sut_Bot
+
+[![5b633d68.jpg](https://i.postimg.cc/mrPbmHCN/5b633d68.jpg)](https://postimg.cc/4KTkdn8m)
 
 ## How to start
 
-1. generate project using `nb create` .
-2. create your plugin using `nb plugin create` .
-3. writing your plugins under `src/plugins` folder.
-4. run your bot using `nb run` .
+git clone https://github.com/DDG667/Sut_Bot
+cd Sut_Bot
+poetry install
+nb run
 
-## Documentation
+## Group
 
-See [Docs](https://v2.nonebot.dev/)
+QQ: 686221881
