@@ -18,6 +18,7 @@ aiohttp = "^3.8.4"
 nonebot-plugin-autorepeater = "^0.1.4"
 nonebot-plugin-who-at-me = "^0.2.8"
 nonebot-plugin-code = "^0.0.5"
+chess = "^1.9.4"
 
 [tool.poetry.dev-dependencies]
 
